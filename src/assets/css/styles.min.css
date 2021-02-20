@@ -1,0 +1,37 @@
+/* All elements */
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    color: #595959;
+    font-size: 14px;
+    line-height: 22px;
+
+    box-sizing: border-box;
+}
+
+/* Tag body */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #595959;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+/* Container */
+
+.container {
+    max-width: 1156px;
+
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* All elements' general settings */
+
+button, a, input, input::placeholder {
+    font-family: 'Montserrat', sans-serif;
+    color: #595959;
+    font-size: 14px;
+    line-height: 22px;
+}
