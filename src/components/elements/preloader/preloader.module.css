@@ -1,0 +1,35 @@
+/* Preloader */
+
+.preloader-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    padding: 25px;
+
+    background-color: #fff;
+}
+.preloader {
+    border-radius: 50%;
+    border: 7px solid #D9D9D9;
+    border-top: 7px solid #0050B3;
+
+    width: 35px;
+    height: 35px;
+
+    transform: rotate(0deg);
+
+    animation: spin .4s linear infinite;
+
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -4,7 +4,14 @@ import React from 'react';
 import {connect} from "react-redux";
 import {compose} from "redux";
 import Header from "./header";
-import {getStatusOfNotifications} from "../../../redux/selectors/selectors";
+import {
+    getAvatarAU,
+    getCurrentAuth,
+    getIdAU,
+    getNameAU,
+    getStatusOfNotifications
+} from "../../../redux/selectors/selectors";
+import {logout} from "../../../redux/reducers/authReducer";
 
 /* Container component */
 
@@ -19,7 +26,7 @@ const HeaderContainer = props => {
 
     return (
         <Header
-            notifications={props.notifications}
+            {...props}
             onSearchSubmit={onSearchSubmit}
         />
     );
@@ -28,6 +35,10 @@ const HeaderContainer = props => {
 /* Creating state for props */
 
 const mapStateToProps = state => ({
+    isAuth: getCurrentAuth(state),
+    nameAU: getNameAU(state),
+    avatarAU: getAvatarAU(state),
+    idAU: getIdAU(state),
     notifications: getStatusOfNotifications(state)
 });
 
@@ -35,6 +46,6 @@ const mapStateToProps = state => ({
 
 export default compose(
     connect(mapStateToProps, {
-
+        logout
     })
 )(HeaderContainer);

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import HeaderContainer from "./components/blocks/header/header-container";
+import {Preloader} from "./components/elements/preloader/preloader";
 
 /* Render of component */
 
