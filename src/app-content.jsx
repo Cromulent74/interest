@@ -1,8 +1,8 @@
 /* Modules */
 
 import React from 'react';
+import styles from './app.module.css';
 import HeaderContainer from "./components/blocks/header/header-container";
-import {Preloader} from "./components/elements/preloader/preloader";
 
 /* Render of component */
 
@@ -10,6 +10,9 @@ const AppContent = props => {
     return (
         <>
             <HeaderContainer/>
+            <main className={styles['main']}>
+
+            </main>
         </>
     )
 };

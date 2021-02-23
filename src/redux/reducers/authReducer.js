@@ -59,7 +59,7 @@ export const auth = () => {
     return dispatch => {
         dispatch(changeValueIsFetchingAuth(true));
 
-        authAPI.me().then(data => {
+        return authAPI.me().then(data => {
             const {
                 id,
                 login,

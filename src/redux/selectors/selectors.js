@@ -6,6 +6,10 @@ import avatar from './../../assets/images/avatar-icon.png';
 
 export const getStatusOfNotifications = state => state.header.notifications;
 
+/* App */
+
+export const getCurrentInitializedApp = state => state.app.initialized;
+
 /* Authorized user */
 
 export const getCurrentAuth = state => state.auth.isAuth;
