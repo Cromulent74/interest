@@ -1,5 +1,11 @@
 /* Applications */
 
+.main {
+    margin-top: 16px;
+}
+.main-container {
+
+}
 .preloader-wrapper {
     display: flex;
     align-items: center;

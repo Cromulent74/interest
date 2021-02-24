@@ -1,0 +1,95 @@
+/* Sidebar */
+
+.sidebar {
+    width: 192px;
+}
+
+.profile-link {
+    display: flex;
+    align-items: center;
+
+    padding: 5px 8px 5px 8px;
+    margin-bottom: 5px;
+
+    text-decoration: none;
+}
+.profile-avatar {
+    width: 26px;
+    height: 26px;
+
+    clip-path: circle(12px);
+}
+.profile-name {
+    color: #262626;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+
+    margin-left: 8px;
+}
+.not-auth {
+    color: #262626;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+}
+
+.sidebar-active {
+    color: #262626;
+    font-weight: 600;
+
+    border-radius: 4px;
+}
+.sidebar-active.sidebar-link_news-feed {
+    background: url("../../../assets/images/news-feed.png") no-repeat left 8px center, #fff;
+    background-size: 24px 24px;
+}
+.sidebar-active.sidebar-link_messages {
+    background: url("../../../assets/images/messages-icon.png") no-repeat left 8px center, #fff;
+    background-size: 24px 24px;
+}
+.sidebar-active.sidebar-link_users {
+    background: url("../../../assets/images/user-add-icon.png") no-repeat left 8px center, #fff;
+    background-size: 24px 24px;
+}
+.sidebar-active::after {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    content: '...';
+
+    font-weight: 400;
+    font-size: 30px;
+
+    position: absolute;
+    right: 8px;
+    bottom: 50%;
+
+    margin-bottom: -2px;
+}
+.sidebar-link {
+    display: block;
+
+    padding: 5px 8px 5px 40px;
+    margin-bottom: 4px;
+
+    text-decoration: none;
+
+    position: relative;
+}
+.sidebar-link:last-child {
+    margin-bottom: 0;
+}
+.sidebar-link_news-feed {
+    background: url("../../../assets/images/news-feed.png") no-repeat left 8px center;
+    background-size: 24px 24px;
+}
+.sidebar-link_messages {
+    background: url("../../../assets/images/messages-icon.png") no-repeat left 8px center;
+    background-size: 24px 24px;
+}
+.sidebar-link_users {
+    background: url("../../../assets/images/user-add-icon.png") no-repeat left 8px center;
+    background-size: 24px 24px;
+}

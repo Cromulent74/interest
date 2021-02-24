@@ -16,6 +16,8 @@ body {
     color: #595959;
     font-size: 14px;
     line-height: 22px;
+
+    background-color: #E5E5E5;
 }
 
 /* Container */
@@ -34,4 +36,10 @@ button, a, input, input::placeholder {
     color: #595959;
     font-size: 14px;
     line-height: 22px;
+}
+
+/* All links */
+
+a:focus {
+    outline: none;
 }
