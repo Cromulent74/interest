@@ -18,7 +18,7 @@ export const changeAuthValue = value => ({type: CHANGE_AUTH_VALUE, value});
 
 const initialState = {
     isAuth: false,
-    isFetchingAuth: false,
+    isFetchingAuth: true,
     id: null,
     avatar: null,
     name: null,
@@ -84,9 +84,7 @@ export const auth = () => {
     }
 };
 
-export const login = (email, password, rememberMe, captcha = true) => {
-    return dispatch => authAPI.login(email, password, rememberMe, captcha).then(data => dispatch(auth()));
-};
+export const login = (email, password, rememberMe, captcha = true) => dispatch => authAPI.login(email, password, rememberMe, captcha).then(data => dispatch(auth()));
 
 export const logout = () => {
     return dispatch => authAPI.logout().then(data => dispatch(auth()));

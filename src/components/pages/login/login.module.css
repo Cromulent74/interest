@@ -1,0 +1,71 @@
+/* Login */
+
+
+.login {
+
+}
+.login-form-wrapper {
+    border-top-left-radius: 100px;
+
+    padding: 50px 75px;
+
+    background-color: #0050B3;
+}
+.login-title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+
+    margin-bottom: 25px;
+}
+.input-wrapper {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+.login-input {
+    display: block;
+
+    color: #333;
+    font-size: 14px;
+
+    padding: 5px 20px;
+
+    background-color: #fff;
+
+    border: none;
+    border-radius: 25px;
+
+    width: 300px;
+}
+.login-input::placeholder {
+    color: #333;
+    font-size: 14px;
+}
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.login-checkbox-label {
+    color: #fff;
+    font-size: 14px;
+
+    margin-left: 5px;
+}
+.login-form-btn {
+    color: #003A8C;
+    font-size: 16px;
+    font-weight: bold;
+
+    padding: 5px 15px;
+    margin-top: 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: #fff;
+}

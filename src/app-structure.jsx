@@ -5,8 +5,8 @@ import styles from './app.module.css';
 import {compose} from "redux";
 import AppContent from "./app-content";
 import {connect} from "react-redux";
-import {initializeApp} from "./redux/reducers/appReducer";
-import {getCurrentInitializedApp} from "./redux/selectors/selectors";
+import {initializeApp, initializedApp} from "./redux/reducers/appReducer";
+import {getCurrentFetchingAuth, getCurrentInitializedApp} from "./redux/selectors/selectors";
 import {Preloader} from "./components/elements/preloader/preloader";
 
 /* Render component */
@@ -17,6 +17,10 @@ const AppStructure = props => {
     useEffect(() => {
         props.initializeApp();
     }, []);
+
+    useEffect(() => {
+        props.initializedApp(!props.isFetchingAuth);
+    }, [props.isFetchingAuth]);
 
     const init = !props.initialized;
 
@@ -43,13 +47,15 @@ const AppStructure = props => {
 /* Creating state to props */
 
 const mapStateToProps = state => ({
-    initialized: getCurrentInitializedApp(state)
+    initialized: getCurrentInitializedApp(state),
+    isFetchingAuth: getCurrentFetchingAuth(state)
 });
 
 /* Export component */
 
 export default compose(
     connect(mapStateToProps, {
-        initializeApp
+        initializeApp,
+        initializedApp
     })
 )(AppStructure);

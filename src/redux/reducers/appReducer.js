@@ -4,26 +4,26 @@ import {auth} from "./authReducer";
 
 /* Action types */
 
-const END_INITIALIZE_APP = 'END INITIALIZE APP';
+const INITIALIZE_APP = 'END INITIALIZE APP';
 
 /* Action creators */
 
-export const endInitializeApp = () => ({type: END_INITIALIZE_APP});
+export const initializedApp = value => ({type: INITIALIZE_APP, value});
 
 /* Initial state */
 
 const initialState = {
-    initialized: false
+    initialized: false,
 };
 
 /* Reducer */
 
 export const appReducer = (state = initialState, action) => {
     switch (action.type) {
-        case END_INITIALIZE_APP: {
+        case INITIALIZE_APP: {
             return {
                 ...state,
-                initialized: true
+                initialized: action.value
             }
         }
         default:
@@ -33,4 +33,8 @@ export const appReducer = (state = initialState, action) => {
 
 /* Thunk creator */
 
-export const initializeApp = () => dispatch => dispatch(auth()).then(() => dispatch(endInitializeApp()));
+export const initializeApp = () => dispatch => {
+    dispatch(initializedApp(false));
+
+    dispatch(auth()).then(() => dispatch(initializedApp(true)));
+};

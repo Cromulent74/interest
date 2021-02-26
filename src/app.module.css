@@ -4,7 +4,9 @@
     margin-top: 16px;
 }
 .main-container {
-
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 .preloader-wrapper {
     display: flex;

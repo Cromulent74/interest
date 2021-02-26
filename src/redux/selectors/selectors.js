@@ -10,6 +10,8 @@ export const getStatusOfNotifications = state => state.header.notifications;
 
 export const getCurrentInitializedApp = state => state.app.initialized;
 
+export const getAppFetching = state => state.app.appFetching;
+
 /* Authorized user */
 
 export const getCurrentAuth = state => state.auth.isAuth;

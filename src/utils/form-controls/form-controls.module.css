@@ -1,0 +1,11 @@
+/* Form controls */
+
+.input-error {
+    border: 1px solid red;
+
+    box-shadow: 0 0 25px 2px rgba(255, 54, 24, 0.5);
+}
+.input-error::placeholder {
+    color: rgb(255, 54, 24);
+    font-weight: 500;
+}
