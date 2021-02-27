@@ -16,6 +16,7 @@ const AppContent = props => {
             <main className={styles['main']}>
                 <div className={`container ${styles['main-container']}`}>
                     <SidebarContainer/>
+                    {/*<Route path={`/profile/:userId`} render={() => <>}/>*/}
                     <Route path={`/login`} render={() => <LoginContainer/>}/>
                 </div>
             </main>

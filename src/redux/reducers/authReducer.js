@@ -1,6 +1,7 @@
 /* Modules */
 
 import {authAPI, profileAPI} from "../../api/api";
+import {stopSubmit} from "redux-form";
 
 /* Action types */
 
@@ -84,7 +85,12 @@ export const auth = () => {
     }
 };
 
-export const login = (email, password, rememberMe, captcha = true) => dispatch => authAPI.login(email, password, rememberMe, captcha).then(data => dispatch(auth()));
+export const login = (email, password, rememberMe, captcha = true) => dispatch => authAPI.login(email, password, rememberMe, captcha).then(data => {
+    if (data.messages.length === 0)
+        dispatch(auth());
+    else
+        dispatch(stopSubmit('login-form', {_error: 'Неправильный логин или пароль'}))
+});
 
 export const logout = () => {
     return dispatch => authAPI.logout().then(data => dispatch(auth()));

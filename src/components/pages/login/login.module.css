@@ -7,7 +7,7 @@
 .login-form-wrapper {
     border-top-left-radius: 100px;
 
-    padding: 50px 75px;
+    padding: 75px 75px 50px 75px;
 
     background-color: #0050B3;
 }
@@ -34,14 +34,18 @@
 
     background-color: #fff;
 
-    border: none;
+    border: 1px solid #fff;
     border-radius: 25px;
 
     width: 300px;
+
+    transition: linear .4s;
 }
 .login-input::placeholder {
     color: #333;
     font-size: 14px;
+
+    transition: linear .4s;
 }
 .checkbox-wrapper {
     display: flex;
@@ -68,4 +72,18 @@
     border-radius: 10px;
 
     background-color: #fff;
+}
+.form-error {
+    color: rgb(255, 54, 24);
+    font-weight: 500;
+
+    margin-top: 25px;
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: linear .4s;
+}
+.form-error-active {
+    transform: scaleX(1);
 }

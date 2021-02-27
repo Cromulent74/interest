@@ -5,6 +5,7 @@ import styles from './login.module.css'
 import {Field, reduxForm} from "redux-form";
 import {required} from "../../../utils/validators/required";
 import {Input} from "../../../utils/form-controls/form-controls";
+import {Redirect} from "react-router";
 
 /* Login form component */
 
@@ -46,6 +47,7 @@ const LoginForm = reduxForm({form: 'login-form'})(props => {
                     <label htmlFor="remember-me" className={styles['login-checkbox-label']}>Запомнить меня</label>
                 </div>
                 <button className={styles['login-form-btn']}>Войти</button>
+                <p className={`${styles['form-error']} ${props.error && styles['form-error-active']}`}>{props.error ? props.error : 'error undefined'}</p>
             </form>
         </div>
     );
@@ -54,11 +56,14 @@ const LoginForm = reduxForm({form: 'login-form'})(props => {
 /* Component */
 
 const Login = props => {
-    return (
-        <div className={styles['login']}>
-            <LoginForm onSubmit={props.onSubmitLoginForm}/>
-        </div>
-    )
+    if (props.isAuth)
+        return <Redirect to={`/news-feed`}/>;
+    else
+        return (
+            <div className={styles['login']}>
+                <LoginForm onSubmit={props.onSubmitLoginForm}/>
+            </div>
+        );
 };
 
 /* Export of component */
