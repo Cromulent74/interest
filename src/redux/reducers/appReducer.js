@@ -13,7 +13,7 @@ export const initializedApp = value => ({type: INITIALIZE_APP, value});
 /* Initial state */
 
 const initialState = {
-    initialized: false,
+    initialized: true
 };
 
 /* Reducer */
@@ -33,8 +33,18 @@ export const appReducer = (state = initialState, action) => {
 
 /* Thunk creator */
 
-export const initializeApp = () => dispatch => {
-    dispatch(initializedApp(false));
+export const initializeApp = (fetching) => dispatch => {
+    let check = true;
 
-    dispatch(auth()).then(() => dispatch(initializedApp(true)));
+    for (let i = 0; i < fetching.length; i++) {
+        if (fetching[i] === true)
+            check = false;
+    }
+
+    if (check)
+        dispatch(initializedApp(false));
+};
+
+export const initializeProcesses = () => dispatch => {
+    dispatch(auth());
 };

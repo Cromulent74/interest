@@ -29,5 +29,9 @@ export const authAPI = {
 
 export const profileAPI = {
     getStatus: (id) => instance.get(`profile/status/${id}`).then(response => response.data),
-    getProfile: (id) => instance.get(`profile/${id}`).then(response => response.data)
-}
+    getProfile: (id) => instance.get(`profile/${id}`).then(response => response.data),
+    setStatus: (status) => instance.put(`/profile/status`, {status}).then(response => response.data),
+    checkOnFollow: (id) => instance.get(`/follow/${id}`).then(response => response.data),
+    follow: (id) => instance.post(`follow/${id}`).then(response => response.data),
+    unFollow: (id) => instance.delete(`follow/${id}`).then(response => response.data)
+};

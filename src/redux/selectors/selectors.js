@@ -25,3 +25,17 @@ export const getAvatarAU = state => state.auth.avatar ? state.auth.avatar : avat
 export const getNameAU = state => state.auth.name;
 
 export const getStatusAU = state => state.auth.status;
+
+/* Profile */
+
+export const getUserId = state => state.profile.id;
+
+export const getUserAvatar = state => state.profile.avatar ? state.profile.avatar : avatar;
+
+export const getUserName = state => state.profile.name;
+
+export const getUserStatus = state => state.profile.status;
+
+export const getCurrentFetchingProfile =  state => state.profile.isFetchingProfile;
+
+export const getCurrentFollowUser = state => state.profile.follow;

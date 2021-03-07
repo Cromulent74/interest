@@ -5,32 +5,30 @@ import styles from './app.module.css';
 import {compose} from "redux";
 import AppContent from "./app-content";
 import {connect} from "react-redux";
-import {initializeApp, initializedApp} from "./redux/reducers/appReducer";
+import {initializeApp, initializedApp, initializeProcesses} from "./redux/reducers/appReducer";
 import {getCurrentFetchingAuth, getCurrentInitializedApp} from "./redux/selectors/selectors";
 import {Preloader} from "./components/elements/preloader/preloader";
 
 /* Render component */
 
 const AppStructure = props => {
-    /* Hooks */
+    /* Effects */
 
     useEffect(() => {
-        props.initializeApp();
+        props.initializeProcesses();
     }, []);
 
     useEffect(() => {
-        props.initializedApp(!props.isFetchingAuth);
+        props.initializeApp([props.isFetchingAuth]);
     }, [props.isFetchingAuth]);
-
-    const init = !props.initialized;
 
     /* Render of component */
 
-    if (init)
+    if (props.initialized)
         return (
             <div className={styles['preloader-wrapper']}>
                 <Preloader
-                    value={init}
+                    value={props.initialized}
                     elements={<AppContent/>}
                 />
             </div>
@@ -38,7 +36,7 @@ const AppStructure = props => {
     else
         return (
             <Preloader
-                value={init}
+                value={props.initialized}
                 elements={<AppContent/>}
             />
         );
@@ -56,6 +54,6 @@ const mapStateToProps = state => ({
 export default compose(
     connect(mapStateToProps, {
         initializeApp,
-        initializedApp
+        initializeProcesses
     })
 )(AppStructure);
