@@ -7,6 +7,7 @@ import SidebarContainer from "./components/elements/sidebar/sidebar-container";
 import {Route} from "react-router";
 import LoginContainer from "./components/pages/login/login-container";
 import ProfileContainer from "./components/pages/profile/profile-container";
+import UsersContainer from "./components/pages/users/users-container";
 
 /* Render of component */
 
@@ -19,6 +20,7 @@ const AppContent = props => {
                     <SidebarContainer/>
                     <Route path={`/profile/:userId`} render={() => <ProfileContainer/>}/>
                     <Route path={`/login`} render={() => <LoginContainer/>}/>
+                    <Route path={`/users`} render={() => <UsersContainer/>}/>
                 </div>
             </main>
         </>

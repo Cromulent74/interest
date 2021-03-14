@@ -39,3 +39,17 @@ export const getUserStatus = state => state.profile.status;
 export const getCurrentFetchingProfile =  state => state.profile.isFetchingProfile;
 
 export const getCurrentFollowUser = state => state.profile.follow;
+
+/* Users */
+
+export const getArrayUsers = state => state.users.users;
+
+export const getArrayFriends = state => state.users.friends;
+
+export const getCurrentFetchingFriends = state => state.users.isFetchingFriends;
+
+export const getCurrentFetchingUsers = state => state.users.isFetchingUsers;
+
+export const getMaxCountFriends = state => state.users.maxCountFriends;
+
+export const getMaxCountUsers = state => state.users.maxCountUsers;

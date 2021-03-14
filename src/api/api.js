@@ -35,3 +35,10 @@ export const profileAPI = {
     follow: (id) => instance.post(`follow/${id}`).then(response => response.data),
     unFollow: (id) => instance.delete(`follow/${id}`).then(response => response.data)
 };
+
+/* Users */
+
+export const usersAPI = {
+    getFriends: (page, count, term) => instance.get(`/users?count=${count}&page=${page}&friend=${true}${term ? `&term=${term}` : ''}`).then(response => response.data),
+    getUsers: (page, count, term) => instance.get(`/users?count=${count}&page=${page}&friend=${false}${term ? `&term=${term}` : ''}`).then(response => response.data)
+};

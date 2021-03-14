@@ -1,0 +1,189 @@
+/* Users */
+
+.users {
+    display: flex;
+    align-items: flex-start;
+
+    width: 100%;
+
+    margin-left: 15px;
+}
+
+/* Friends wrapper */
+
+
+.friends-wrapper {
+    background-color: #fff;
+
+    border-radius: 5px;
+
+    width: 60%;
+
+    box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.025);
+}
+.users-wrapper {
+    background-color: #fff;
+
+    border-radius: 5px;
+
+    width: 33%;
+
+    box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.025);
+
+    margin-left: 15px;
+}
+.title {
+    font-size: 22px;
+    font-weight: 500;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    background-color: #eee;
+
+    padding: 15px 25px;
+}
+.buttons-wrapper {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+}
+.previous-page {
+    font-size: 16px;
+    font-weight: 500;
+
+    background-color: #eee;
+
+    border: none;
+
+    padding: 8px 15px;
+
+    width: 50%;
+
+    transition: ease .5s;
+}
+.previous-page:hover {
+    background-color: #cfcfcf;
+}
+.next-page {
+    font-size: 16px;
+    font-weight: 500;
+
+    background-color: #eee;
+
+    border: none;
+
+    padding: 8px 15px;
+
+    width: 50%;
+
+    transition: ease .5s;
+}
+.next-page:hover {
+    background-color: #cfcfcf;
+}
+.previous-page-disabled {
+    color: #ccc;
+}
+.previous-page-disabled:hover {
+    background-color: #eee
+}
+.next-page-disabled {
+    color: #ccc;
+}
+.next-page-disabled:hover {
+    background-color: #eee
+}
+
+/* Elements */
+
+.link {
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+
+    padding: 10px 25px;
+
+    background-color: #fff;
+
+    transition: ease .5s;
+}
+.link:hover {
+    background-color: #cfcfcf;
+}
+.link:last-child {
+    margin-bottom: 0;
+}
+.avatar {
+    width: 72px;
+    height: 72px;
+
+    clip-path: circle(35px);
+}
+.info {
+    margin-left: 10px;
+}
+.name {
+    display: block;
+
+    color: #0050B3;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+}
+.name:hover {
+    text-decoration: underline;
+}
+.buttons-wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+.write-message {
+    display: block;
+
+    color: #0050B3;
+    font-weight: 500;
+    line-height: 100%;
+    text-decoration: none;
+
+    margin-top: 5px;
+}
+.write-message:hover {
+    text-decoration: underline;
+}
+.un-follow {
+    display: block;
+
+    color: red;
+    font-weight: 500;
+    line-height: 100%;
+
+    background-color: transparent;
+
+    border: none;
+
+    padding: 0;
+    margin-top: 3px;
+}
+.un-follow:hover {
+    text-decoration: underline;
+}
+.follow {
+    display: block;
+
+    color: #0050B3;
+    font-weight: 500;
+    line-height: 100%;
+
+    background-color: transparent;
+
+    border: none;
+
+    padding: 0;
+    margin-top: 3px;
+}
+.follow:hover {
+    text-decoration: underline;
+}
