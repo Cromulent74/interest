@@ -5,27 +5,38 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import Login from "./login";
 import {login} from "../../../redux/reducers/authReducer";
-import {getCurrentAuth} from "../../../redux/selectors/selectors";
+import {getCurrentAuth, getCurrentFetchingAuth} from "../../../redux/selectors/selectors";
+import {Preloader} from "../../elements/preloader/preloader";
 
 /* Component */
 
-const LoginContainer = props => {
+const LoginContainer = React.memo(props => {
+    /* Event handlers */
+
     const onSubmitLoginForm = formData => {
         props.login(formData.email ? formData.email : '', formData.password ? formData.password : '', formData.rememberMe ? formData.rememberMe : false, true);
     };
 
+    /* Render of component */
+
     return (
-        <Login
-            {...props}
-            onSubmitLoginForm={onSubmitLoginForm}
+        <Preloader
+            value={props.isFetchingAuth}
+            elements={
+                <Login
+                    {...props}
+                    onSubmitLoginForm={onSubmitLoginForm}
+                />
+            }
         />
     )
-};
+});
 
 /* Creating state for props */
 
 const mapStateToProps = state => ({
-    isAuth: getCurrentAuth(state)
+    isAuth: getCurrentAuth(state),
+    isFetchingAuth: getCurrentFetchingAuth(state)
 });
 
 /* Export of component */

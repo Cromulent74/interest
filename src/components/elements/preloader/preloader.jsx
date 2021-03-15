@@ -5,16 +5,16 @@ import styles from './preloader.module.css';
 
 /* Component */
 
-export const Preloader = props => {
+export const Preloader = React.memo(props => {
     /* UI element */
 
-    const PreloaderUI = props => {
+    const PreloaderUI = React.memo(props => {
         return (
             <div className={styles['preloader-wrapper']}>
                 <div className={styles['preloader']}/>
             </div>
         )
-    };
+    });
 
     /* Render elements */
 
@@ -22,4 +22,4 @@ export const Preloader = props => {
         return <PreloaderUI/>;
     else
         return props.elements;
-};
+});

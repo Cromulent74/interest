@@ -1,6 +1,6 @@
 /* Modules */
 
-import React from 'react';
+import React, {useMemo} from 'react';
 import avatar from './../../../assets/images/avatar-icon.png';
 import styles from './users.module.css';
 import {NavLink} from "react-router-dom";
@@ -8,12 +8,12 @@ import {Preloader} from "../../elements/preloader/preloader";
 
 /* Component */
 
-const Users = props => {
+const Users = React.memo(props => {
     /* UI elements */
 
-    const friends = props.friends.map((element) => {
+    const friends = useMemo(() => props.friends.map((element, index) => {
         return (
-            <div className={styles['link']}>
+            <div key={index} className={styles['link']}>
                 <NavLink to={`/profile/${element.id}`}>
                     <img src={element.photos.large ? element.photos.large : avatar} alt="user avatar" className={styles['avatar']}/>
                 </NavLink>
@@ -24,11 +24,11 @@ const Users = props => {
                 </div>
             </div>
         );
-    });
+    }), [props.friends]);
 
-    const users = props.users.map((element) => {
+    const users = useMemo(() => props.users.map((element, index) => {
         return (
-            <div className={styles['link']}>
+            <div key={index} className={styles['link']}>
                 <NavLink to={`/profile/${element.id}`}>
                     <img src={element.photos.large ? element.photos.large : avatar} alt="user avatar" className={styles['avatar']}/>
                 </NavLink>
@@ -38,7 +38,7 @@ const Users = props => {
                 </div>
             </div>
         );
-    });
+    }), [props.users]);
 
     /* Render of component */
 
@@ -72,7 +72,7 @@ const Users = props => {
             </div>
         </article>
     )
-};
+});
 
 /* Export of component */
 

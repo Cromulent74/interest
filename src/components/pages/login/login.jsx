@@ -9,7 +9,7 @@ import {Redirect} from "react-router";
 
 /* Login form component */
 
-const LoginForm = reduxForm({form: 'login-form'})(props => {
+const LoginForm = reduxForm({form: 'login-form'})(React.memo(props => {
     return (
         <div className={styles['login-form-wrapper']}>
             <form onSubmit={props.handleSubmit} className={styles['login-form']}>
@@ -51,11 +51,11 @@ const LoginForm = reduxForm({form: 'login-form'})(props => {
             </form>
         </div>
     );
-});
+}));
 
 /* Component */
 
-const Login = props => {
+const Login = React.memo(props => {
     if (props.isAuth)
         return <Redirect to={`/news-feed`}/>;
     else
@@ -64,7 +64,7 @@ const Login = props => {
                 <LoginForm onSubmit={props.onSubmitLoginForm}/>
             </div>
         );
-};
+});
 
 /* Export of component */
 

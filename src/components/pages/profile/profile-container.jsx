@@ -15,13 +15,12 @@ import {
     getUserName,
     getUserStatus
 } from "../../../redux/selectors/selectors";
-import {followToUser, loadProfile, saveStatus, setStatus, unFollowToUser} from "../../../redux/reducers/profileReducer";
+import {followToUser, loadProfile, saveStatus, unFollowToUser} from "../../../redux/reducers/profileReducer";
 import {Preloader} from "../../elements/preloader/preloader";
-import {profileAPI} from "../../../api/api";
 
 /* Component */
 
-const ProfileContainer = props => {
+const ProfileContainer = React.memo(props => {
     /* Local State */
 
     const [statusInput, changeStatusInput] = useState(props.userStatus);
@@ -79,7 +78,7 @@ const ProfileContainer = props => {
             }
         />
     )
-};
+});
 
 /* Creating state for props */
 

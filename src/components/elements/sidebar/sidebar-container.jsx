@@ -8,7 +8,7 @@ import {getAvatarAU, getCurrentAuth, getIdAU, getNameAU} from "../../../redux/se
 
 /* Component */
 
-const SidebarContainer = props => {
+const SidebarContainer = React.memo(props => {
     /* Render of component */
 
     return (
@@ -16,7 +16,7 @@ const SidebarContainer = props => {
             {...props}
         />
     );
-};
+});
 
 /* Creating state to props */
 

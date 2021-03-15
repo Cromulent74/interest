@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 
 /* Component */
 
-const Sidebar = props => {
+const Sidebar = React.memo(props => {
     /* Render of component */
 
     return (
@@ -26,7 +26,7 @@ const Sidebar = props => {
             <NavLink to={`/users`} className={`${styles['sidebar-link']} ${styles['sidebar-link_users']}`} activeClassName={styles['sidebar-active']}>Users</NavLink>
         </aside>
     )
-};
+});
 
 /* Exporting component */
 

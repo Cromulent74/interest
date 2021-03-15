@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 
 /* Component */
 
-const Profile = props => {
+const Profile = React.memo(props => {
     /* Render elements */
 
     return (
@@ -44,7 +44,7 @@ const Profile = props => {
             </div>
         </article>
     );
-};
+});
 
 /* Export of component */
 

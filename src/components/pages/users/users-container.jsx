@@ -15,7 +15,7 @@ import {
 
 /* Component */
 
-const UsersContainer = props => {
+const UsersContainer = React.memo(props => {
     /* State */
 
     const [pageFriends, changePageFriends] = useState(1);
@@ -76,7 +76,7 @@ const UsersContainer = props => {
             onPagePrevFriends={onPagePrevFriends}
         />
     )
-};
+});
 
 /* Creating state for props */
 
