@@ -5,14 +5,17 @@ import {stopSubmit} from "redux-form";
 
 /* Action types */
 
-const CHANGE_VALUE_IS_FETCHING_AUTH = 'CHANGE VALUE IS FETCHING OF AUTH';
-const CHANGE_AUTH_USER_INFO = 'CHANGE AUTH USER INFO';
-const CHANGE_AUTH_VALUE = 'CHANGE AUTH VALUE';
+const CHANGE_VALUE_IS_FETCHING_AUTH = 'auth-reducer/CHANGE-VALUE-IS-FETCHING-OF-AUTH';
+const CHANGE_AUTH_USER_INFO = 'auth-reducer/CHANGE-AUTH-USER-INFO';
+const CHANGE_AUTH_VALUE = 'auth-reducer/CHANGE-AUTH-VALUE';
 
 /* Action creators */
 
 export const changeValueIsFetchingAuth = value => ({type: CHANGE_VALUE_IS_FETCHING_AUTH, value});
-export const changeAuthUserInfo = (id, avatar, name, status, email) => ({type: CHANGE_AUTH_USER_INFO, info: {id, avatar, name, status, email}});
+export const changeAuthUserInfo = (id, avatar, name, status, email) => ({
+    type: CHANGE_AUTH_USER_INFO,
+    info: {id, avatar, name, status, email}
+});
 export const changeAuthValue = value => ({type: CHANGE_AUTH_VALUE, value});
 
 /* Initial state */
@@ -37,7 +40,7 @@ export const authReducer = (state = initialState, action) => {
                 isFetchingAuth: action.value
             };
         }
-        case CHANGE_AUTH_VALUE:{
+        case CHANGE_AUTH_VALUE: {
             return {
                 ...state,
                 isAuth: action.value
@@ -56,42 +59,43 @@ export const authReducer = (state = initialState, action) => {
 
 /* Thunk creator */
 
-export const auth = () => {
-    return dispatch => {
-        dispatch(changeValueIsFetchingAuth(true));
+export const auth = () => async dispatch => {
+    dispatch(changeValueIsFetchingAuth(true));
 
-        return authAPI.me().then(data => {
-            const {
-                id,
-                login,
-                email
-            } = data.data;
+    const data = await authAPI.me();
 
-            if (data.messages.length === 0) {
-                profileAPI.getStatus(id).then(status => {
-                    profileAPI.getProfile(id).then(profileInfo => {
-                        const avatarUser = profileInfo.photos.large;
+    const {
+        id,
+        login,
+        email
+    } = data.data;
 
-                        dispatch(changeValueIsFetchingAuth(false));
-                        dispatch(changeAuthValue(true));
-                        dispatch(changeAuthUserInfo(id, avatarUser, login, status, email));
-                    });
-                });
-            } else {
-                dispatch(changeValueIsFetchingAuth(false));
-                dispatch(changeAuthValue(false));
-            }
-        })
+    if (data.messages.length === 0) {
+        const status = await profileAPI.getStatus(id);
+        const profileInfo = await profileAPI.getProfile(id);
+
+        const avatarUser = profileInfo.photos.large;
+
+        dispatch(changeValueIsFetchingAuth(false));
+        dispatch(changeAuthValue(true));
+        dispatch(changeAuthUserInfo(id, avatarUser, login, status, email));
+    } else {
+        dispatch(changeValueIsFetchingAuth(false));
+        dispatch(changeAuthValue(false));
     }
 };
 
-export const login = (email, password, rememberMe, captcha = true) => dispatch => authAPI.login(email, password, rememberMe, captcha).then(data => {
+export const login = (email, password, rememberMe, captcha = true) => async dispatch => {
+    const data = await authAPI.login(email, password, rememberMe, captcha);
+
     if (data.messages.length === 0)
         dispatch(auth());
     else
         dispatch(stopSubmit('login-form', {_error: 'Неправильный логин или пароль'}))
-});
+};
 
-export const logout = () => {
-    return dispatch => authAPI.logout().then(data => dispatch(auth()));
+export const logout = () => async dispatch => {
+    await authAPI.logout();
+
+    dispatch(auth());
 };

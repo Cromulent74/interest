@@ -47,17 +47,15 @@ const UsersContainer = React.memo(props => {
         changePageFriends(pageFriends - 1);
         props.getFriends(pageFriends - 1, pageSize);
     };
-    const onFollow = (id) => {
-        props.follow(id).then(() => {
-            props.getFriends(pageFriends, pageSize);
-            props.getUsers(pageUsers, pageSize);
-        });
+    const onFollow = async (id) => {
+        await props.follow(id);
+        props.getFriends(pageFriends, pageSize);
+        props.getUsers(pageUsers, pageSize);
     };
-    const onUnFollow = (id) => {
-        props.unFollow(id).then(() => {
-            props.getFriends(pageFriends, pageSize);
-            props.getUsers(pageUsers, pageSize);
-        });
+    const onUnFollow = async (id) => {
+        await props.unFollow(id);
+        props.getFriends(pageFriends, pageSize);
+        props.getUsers(pageUsers, pageSize);
     };
 
     /* Render of component */

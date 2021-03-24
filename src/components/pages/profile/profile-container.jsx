@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import Profile from "./profile";
 import {
-    getAvatarAU, getCurrentAuth, getCurrentFetchingProfile, getCurrentFollowUser, getCurrentInitializedApp,
+    getAvatarAU, getCurrentFetchingProfile, getCurrentFollowUser, getCurrentInitializedApp,
     getIdAU,
     getNameAU,
     getStatusAU,

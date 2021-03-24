@@ -15,7 +15,7 @@ import {logout} from "../../../redux/reducers/authReducer";
 
 /* Container component */
 
-const HeaderContainer = props => {
+const HeaderContainer = React.memo(props => {
     /* Event handlers */
 
     const onSearchSubmit = formData => {
@@ -30,7 +30,7 @@ const HeaderContainer = props => {
             onSearchSubmit={onSearchSubmit}
         />
     );
-};
+});
 
 /* Creating state for props */
 

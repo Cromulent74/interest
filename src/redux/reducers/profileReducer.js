@@ -4,15 +4,18 @@ import {profileAPI} from "../../api/api";
 
 /* Action types */
 
-const SET_PROFILE = 'SET PROFILE';
-const CHANGE_FETCHING_PROFILE = 'CHANGE FETCHING OF PROFILE';
-const SET_STATUS = 'SET STATUS';
-const FOLLOW = 'FOLLOW';
-const UN_FOLLOW = 'UN FOLLOW';
+const SET_PROFILE = 'profile-reducer/SET-PROFILE';
+const CHANGE_FETCHING_PROFILE = 'profile-reducer/CHANGE-FETCHING-OF-PROFILE';
+const SET_STATUS = 'profile-reducer/SET-STATUS';
+const FOLLOW = 'profile-reducer/FOLLOW';
+const UN_FOLLOW = 'profile-reducer/UN-FOLLOW';
 
 /* Action creators */
 
-export const setProfile = (id, avatar, name, status, follow) => ({type: SET_PROFILE, info: {id, avatar, name, status, follow}});
+export const setProfile = (id, avatar, name, status, follow) => ({
+    type: SET_PROFILE,
+    info: {id, avatar, name, status, follow}
+});
 export const changeFetchingProfile = value => ({type: CHANGE_FETCHING_PROFILE, value});
 export const setStatus = status => ({type: SET_STATUS, status});
 export const follow = () => ({type: FOLLOW});
@@ -68,6 +71,17 @@ export const profileReducer = (state = initialState, action) => {
     }
 };
 
+/* Templates */
+
+const toggleFollowTemplate = async (apiMethod, actionCreator, dispatch, id) => {
+    dispatch(changeFetchingProfile(true));
+
+    await apiMethod(id);
+
+    dispatch(actionCreator());
+    dispatch(changeFetchingProfile(false));
+};
+
 /* Thunk creators */
 
 export const loadProfile = (userId, myId, myAvatar, myName, myStatus) => dispatch => {
@@ -79,41 +93,31 @@ export const loadProfile = (userId, myId, myAvatar, myName, myStatus) => dispatc
         dispatch(getProfile(userId));
 };
 
-export const getProfile = (id) => dispatch => {
+export const getProfile = (id) => async dispatch => {
     dispatch(changeFetchingProfile(true));
 
-    profileAPI.getStatus(id).then(status => profileAPI.getProfile(id).then(data => profileAPI.checkOnFollow(id).then(check => {
+    const status = await profileAPI.getStatus(id);
+    const data = await profileAPI.getProfile(id);
+    const check = await profileAPI.checkOnFollow(id);
+
+    dispatch(changeFetchingProfile(false));
+    dispatch(setProfile(id, data.photos.large, data.fullName, status, check))
+};
+
+export const saveStatus = (statusInput, changeEditMode) => async dispatch => {
+    dispatch(changeFetchingProfile(true));
+
+    const response = await profileAPI.setStatus(statusInput, changeEditMode);
+
+    if (Number(response.resultCode) === 0) {
+        dispatch(setStatus(statusInput));
         dispatch(changeFetchingProfile(false));
-        dispatch(setProfile(id, data.photos.large, data.fullName, status, check))
-    })))
+        changeEditMode(false);
+    }
+
+    return response;
 };
 
-export const saveStatus = (statusInput, changeEditMode) => dispatch => {
-    dispatch(changeFetchingProfile(true));
+export const followToUser = (id) => async dispatch => await toggleFollowTemplate(profileAPI.follow.bind(profileAPI), follow, dispatch, id);
 
-    return profileAPI.setStatus(statusInput, changeEditMode).then(response => {
-        if (Number(response.resultCode) === 0) {
-            dispatch(setStatus(statusInput));
-            dispatch(changeFetchingProfile(false));
-            changeEditMode(false);
-        }
-    });
-};
-
-export const followToUser = (id) => dispatch => {
-    dispatch(changeFetchingProfile(true));
-
-    profileAPI.follow(id).then(() => {
-        dispatch(follow());
-        dispatch(changeFetchingProfile(false));
-    });
-};
-
-export const unFollowToUser = (id) => dispatch => {
-    dispatch(changeFetchingProfile(true));
-
-    profileAPI.unFollow(id).then(() => {
-        dispatch(unFollow());
-        dispatch(changeFetchingProfile(false));
-    });
-};
+export const unFollowToUser = (id) => async dispatch => await toggleFollowTemplate(profileAPI.unFollow.bind(profileAPI), unFollow, dispatch, id);

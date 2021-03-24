@@ -4,7 +4,7 @@ import {auth} from "./authReducer";
 
 /* Action types */
 
-const INITIALIZE_APP = 'END INITIALIZE APP';
+const INITIALIZE_APP = 'app-reducer/END-INITIALIZE-APP';
 
 /* Action creators */
 
@@ -45,6 +45,4 @@ export const initializeApp = (fetching) => dispatch => {
         dispatch(initializedApp(false));
 };
 
-export const initializeProcesses = () => dispatch => {
-    dispatch(auth());
-};
+export const initializeProcesses = () => dispatch => dispatch(auth());

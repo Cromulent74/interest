@@ -2,12 +2,12 @@
 
 import {profileAPI, usersAPI} from "../../api/api";
 
-const SET_USERS = 'SET USERS';
-const SET_FRIENDS = 'SET FRIENDS';
-const CHANGE_FETCHING_FRIENDS = 'CHANGE FETCHING FRIENDS';
-const CHANGE_FETCHING_USERS = 'CHANGE FETCHING USERS';
-const SET_MAX_COUNT_FRIENDS = 'SET MAX COUNT FRIENDS';
-const SET_MAX_COUNT_USERS = 'SET MAX COUNT USERS';
+const SET_USERS = 'users-reducer/SET-USERS';
+const SET_FRIENDS = 'users-reducer/SET-FRIENDS';
+const CHANGE_FETCHING_FRIENDS = 'users-reducer/CHANGE-FETCHING-FRIENDS';
+const CHANGE_FETCHING_USERS = 'users-reducer/CHANGE-FETCHING-USERS';
+const SET_MAX_COUNT_FRIENDS = 'users-reducer/SET-MAX-COUNT-FRIENDS';
+const SET_MAX_COUNT_USERS = 'users-reducer/SET-MAX-COUNT-USERS';
 
 /* Action creators */
 
@@ -74,42 +74,58 @@ export const usersReducer = (state = initialState, action) => {
     }
 };
 
+/* Templates */
+
+const getDataTemplate = async (page, pageSize, term, apiMethod, setListAC, setMaxCountAC, changeFetchingAC, dispatch) => {
+    dispatch(changeFetchingAC(true));
+
+    const response = await apiMethod(page, pageSize, term);
+
+    dispatch(changeFetchingAC(false));
+
+    if (response.error === null) {
+        dispatch(setListAC(response.items));
+        dispatch(setMaxCountAC(response.totalCount));
+    }
+};
+
+const toggleFollowTemplate = async (id,  actionCreator, apiMethod, dispatch) => {
+    dispatch(actionCreator(true));
+
+    const response = await apiMethod(id);
+    dispatch(actionCreator(false));
+
+    return response;
+};
+
 /* Thunk creators */
 
-export const getUsers = (page, pageSize, term) => dispatch => {
-    dispatch(changeFetchingUsers(true));
+export const getUsers = (page, pageSize, term) =>
+    async dispatch =>
+        await getDataTemplate(
+            page,
+            pageSize,
+            term,
+            usersAPI.getUsers.bind(usersAPI),
+            setUsers,
+            setMaxCountUsers,
+            changeFetchingUsers,
+            dispatch
+        );
 
-    usersAPI.getUsers(page, pageSize, term).then(response => {
-        dispatch(changeFetchingUsers(false));
+export const getFriends = (page, pageSize, term) =>
+    async dispatch =>
+        await getDataTemplate(
+            page,
+            pageSize,
+            term,
+            usersAPI.getFriends.bind(usersAPI),
+            setFriends,
+            setMaxCountFriends,
+            changeFetchingFriends,
+            dispatch
+        );
 
-        if (response.error === null) {
-            dispatch(setUsers(response.items));
-            dispatch(setMaxCountUsers(response.totalCount));
-        }
-    });
-};
+export const follow = (id) => async dispatch => await toggleFollowTemplate(id, changeFetchingUsers, profileAPI.follow.bind(profileAPI), dispatch);
 
-export const getFriends = (page, pageSize, term) => dispatch => {
-    dispatch(changeFetchingFriends(true));
-
-    usersAPI.getFriends(page, pageSize, term).then(response => {
-        dispatch(changeFetchingFriends(false));
-
-        if (response.error === null) {
-            dispatch(setFriends(response.items));
-            dispatch(setMaxCountFriends(response.totalCount));
-        }
-    });
-};
-
-export const follow = (id) => dispatch => {
-    dispatch(changeFetchingUsers(true));
-
-    return profileAPI.follow(id).then(() => dispatch(changeFetchingUsers(false)));
-};
-
-export const unFollow = (id) => dispatch => {
-    dispatch(changeFetchingFriends(true));
-
-    return profileAPI.unFollow(id).then(() => dispatch(changeFetchingFriends(false)));
-};
+export const unFollow = (id) => async dispatch => await toggleFollowTemplate(id, changeFetchingFriends, profileAPI.unFollow.bind(profileAPI), dispatch);
