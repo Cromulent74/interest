@@ -21,7 +21,6 @@ const Sidebar = React.memo(props => {
                     <p className={styles['not-auth']}>Авторизуйтесь</p>
                 </div>
             )}
-            <NavLink to={`/news-feed`} className={`${styles['sidebar-link']} ${styles['sidebar-link_news-feed']}`} activeClassName={styles['sidebar-active']}>News feed</NavLink>
             <NavLink to={`/messages`} className={`${styles['sidebar-link']} ${styles['sidebar-link_messages']}`} activeClassName={styles['sidebar-active']}>Messages</NavLink>
             <NavLink to={`/users`} className={`${styles['sidebar-link']} ${styles['sidebar-link_users']}`} activeClassName={styles['sidebar-active']}>Users</NavLink>
         </aside>
